@@ -32,10 +32,11 @@ app.get('/', apiKeyMiddleware, (req, res) => {
 app.post('/location', apiKeyMiddleware, async (req, res) => {
     try {
         await pool.query(
-            "INSERT INTO dbLocations.Location (latitude, longitude) VALUES(?,?)",
+            "INSERT INTO dbLocations.Location (latitude, longitude, dateT) VALUES(?,?,?)",
             [
                 req.body.Latitude,
-                req.body.Longitude
+                req.body.Longitude,
+                req.body.DateT
             ]);
         res.sendStatus(201).send();
     } catch (error) {
